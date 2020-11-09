@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div style="border:2px;" id="app">
+    <div id="xs">
+        <table  border="1px">
+            <tr>
+                <td><input type="text" value="" id="text" ></td>
+            </tr>
+            <tr >
+                  <td><button class="but" value="1">1</button>
+                      <button class="but" value="2">2</button>
+                      <button class="but" value="3">3</button>
+                      <button class="but" value="+">+</button>
+                      <button class="but" value="/">/</button>
+                      <button class="but" value="c">C</button>
+                  </td>
+            </tr>
+            <tr >
+                  <td><button class="but" value="4">4</button>
+                      <button class="but" value="5">5</button>
+                      <button class="but" value="6">6</button>
+                      <button class="but" value="-">-</button>
+                      <button class="but" value="*">*</button>
+                  </td>
+            </tr>
+            <tr >
+                  <td>
+                      <button class="but" value="7">7</button>
+                      <button class="but" value="8">8</button>
+                      <button class="but" value="9">9</button>
+                      <button class="but" value="0">0</button>
+                      <button class="but" value="=">=</button>
+                     <button id="aa" value="提交" >确定</button>
+                  </td>
+            </tr>
+
+        </table>
+    </div>
+
+
+
+</div>
+<script type="text/javascript"  language="JavaScript">
+    window.onload=function () {
+        var a=document.getElementById("text");
+        var fas=document.getElementById("aa");
+         var  c= document.getElementsByClassName('but');
+     //    var aaa=document.getElementById("a");
+        var apper="";
+        function f(d){
+            apper=apper.concat(d);
+            a.value = apper;
+        };
+         for (var i=0;i<c.length;i++) {
+             if (i=5){
+                 c[i].onclick=function () {
+                        a.value="";
+                 }
+             };
+             c[i].onclick = function () {
+                 var apper2 = this.value;
+                f(apper2);
+             };
+             }
+         fas.onclick= function (){
+              var g="/cal?url=";
+              console.log(a.value);
+              var gg=g.concat(a.value);
+              for(var i=0;i<gg.length;i++){
+                  if(gg.charAt(i)=="+"){
+                     gg=gg.replace(gg.charAt(i),"%2B");
+                  }
+              }
+
+              var xmlHttpRequest =new XMLHttpRequest();
+             xmlHttpRequest.open("get",gg,true);
+             xmlHttpRequest.onreadystatechange=function () {
+                 if((xmlHttpRequest.readyState==4) && (xmlHttpRequest.status=200) ){
+                     a.value=xmlHttpRequest.responseText;
+                 }
+             }
+             xmlHttpRequest.send();
+         }
+
+
+
+
+    }
+</script>
+
+</body>
+</html>
